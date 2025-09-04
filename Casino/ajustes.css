@@ -1,0 +1,60 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(60, 0, 45, 0.85);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.navbar-brand img {
+  max-height: 40px;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.5));
+}
+
+.navbar-nav .nav-link {
+  color: var(--blanco-suave);
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+  color: var(--dorado);
+}
+
+.lang-buttons .btn-lang {
+  background-color: transparent;
+  border: 2px solid var(--blanco-suave);
+  color: var(--blanco-suave);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.lang-buttons .btn-lang:hover {
+  background-color: var(--dorado);
+  color: var(--vino-oscuro);
+  border-color: var(--dorado);
+}
+.lang-buttons .btn-es {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-color: rgba(128,0,32,0.78);
+  z-index: -1;
+  pointer-events: none;
+}
+
+:root {
+  --vino: #800020;
+  --vino-oscuro: #3C002D;
+  --dorado: #AC925C;
+  --blanco: #ffffff;
+  --blanco-suave: #f4f0eb;
+  --espaciado: 20px;
+}

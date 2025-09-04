@@ -1,0 +1,80 @@
+:root {
+  --color-fondo: #800020;
+  --overlay: rgba(128, 0, 32, 0.7);
+  --nav-bg: #3C002D;
+  --btn-bg: #4B1428;
+  --btn-hover-bg: #AC925C;
+  --btn-hover-text: #3C002D;
+  --spacing-sm: 10px;
+  --spacing-md: 20px;
+  --focus-outline: 3px solid var(--btn-hover-bg);
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url("https://i.imgur.com/Ry2iw2z.png") repeat var(--color-fondo);
+  background-size: 80px;
+  color: white;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-color: var(--overlay);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.main-header {
+  text-align: center;
+  margin-top: 60px;
+  padding: 0 var(--spacing-md);
+}
+
+.main-header h1 {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.main-header p {
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 400px;
+  margin: 40px auto 0 auto;
+}
+.btn-casino {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  background-color: var(--btn-bg);
+  color: white;
+  padding: 12px 25px;
+  border: 2px solid white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-casino svg {
+  fill: white;
+}
+
+.btn-casino:hover,
+.btn-casino:focus {
+  background-color: var(--btn-hover-bg);
+  color: var(--btn-hover-text);
+  border-color: var(--btn-hover-bg);
+  transform: scale(1.05);
+  outline: var(--focus-outline);
+}
