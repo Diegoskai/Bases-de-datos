@@ -1,30 +1,26 @@
-/* ...existing code... */
-/* CasinoFinal.css */
-/* ================== VARIABLES ================== */
+/* ================== variables y base ================== */
 :root {
   --vino: #800020;
-  --vino-oscuro: #3C002D;
-  --dorado: #AC925C;
+  --vino-oscuro: #3c002d;
+  --dorado: #ac925c;
   --blanco: #ffffff;
   --blanco-suave: #f4f0eb;
+  --negro: #000;
   --spacing-sm: 10px;
   --spacing-md: 20px;
-  --color-fondo: #800020;
   --overlay: rgba(128, 0, 32, 0.7);
-  --nav-bg: #3C002D;
-  --btn-bg: #4B1428;
-  --btn-hover-bg: #AC925C;
-  --btn-hover-text: #3C002D;
-  --focus-outline: 3px solid var(--btn-hover-bg);
-  --navbar-height: 64px; /* nueva variable para alturas coherentes */
+  --btn-hover-text: #3c002d;
+  --navbar-height: 64px;
 }
 
-/* ================== BASE ================== */
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, Arial, sans-serif;
   background-color: var(--vino);
   background-image: url("https://i.imgur.com/Ry2iw2z.png");
   background-repeat: repeat;
@@ -35,14 +31,12 @@ body {
   position: relative;
   z-index: 0;
   min-height: 100dvh;
-  /* reservar exactamente la altura de la navbar para evitar solapado */
   padding-top: var(--navbar-height);
   padding-bottom: 60px;
   box-sizing: border-box;
   display: block;
 }
 
-/* Overlay para fondo */
 body::before {
   content: "";
   position: fixed;
@@ -52,13 +46,12 @@ body::before {
   pointer-events: none;
 }
 
-/* ================== NAVBAR ================== */
+/* ================== navbar ================== */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* padding horizontal consistente y caja incluida para evitar recorte */
-  padding: 12px calc(var(--spacing-md) + 12px);
+  padding: 12px 24px;
   box-sizing: border-box;
   background-color: rgba(60, 0, 45, 0.95);
   position: fixed;
@@ -67,7 +60,7 @@ body::before {
   width: 100%;
   height: var(--navbar-height);
   z-index: 1200;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 .navbar-left {
@@ -75,66 +68,12 @@ body::before {
   align-items: center;
 }
 
-/* ===== logo: forzar tamaño consistente en todas las páginas ===== */
-/* Reglas más específicas y con altura fija para evitar que otras hojas lo cambien */
-.navbar,
-.navbar-left,
-.navbar-brand,
-.navbar .navbar-logo,
-.navbar .navbar-brand,
-.navbar > a,
-.navbar > div {
-  align-items: center;
-  display: flex;
+.navbar-logo {
+  height: 48px;
+  max-height: 48px;
+  width: auto;
 }
 
-/* Forzar altura exacta del logo dentro de la navbar (ajustar el -12px si desea más separación) */
-.navbar img,
-.navbar .navbar-logo,
-.navbar-brand img,
-.navbar-logo img,
-.navbar > img,
-.navbar img.logo,
-.logo-img,
-.logo {
-  height: calc(var(--navbar-height) - 12px) !important;
-  max-height: calc(var(--navbar-height) - 12px) !important;
-  width: auto !important;
-  max-width: none !important;
-  display: block !important;
-  object-fit: contain !important;
-  vertical-align: middle !important;
-  margin: 0 12px 0 0 !important;
-  padding: 0 !important;
-  border: none !important;
-}
-
-/* Asegurar que el contenedor del logo no empuje por tamaño de fuente */
-.navbar-brand {
-  background-color: #800020;
-  color: white;
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 1.2rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  line-height: 1;
-}
-
-/* cubrir diferentes selectores por si el logo está en .navbar-brand o en un img directo */
-.navbar-brand img,
-.navbar-logo img,
-.navbar > img {
-  height: calc(var(--navbar-height) - 12px) !important;
-  max-height: calc(var(--navbar-height) - 12px) !important;
-  width: auto !important;
-  display: block !important;
-  object-fit: contain !important;
-}
-
-/* ================== NAV LINKS ================== */
 .nav-links {
   display: flex;
   justify-content: center;
@@ -143,40 +82,39 @@ body::before {
   list-style: none;
   margin: 0;
   padding: 0;
-  margin-right: 12px;
 }
 
-.nav-links a {
+.nav-links li a {
   color: var(--blanco);
   text-decoration: none;
-  font-weight: bold;
-  font-size: 1.2rem;
-  transition: color 0.2s;
-  white-space: nowrap; /* evita que "Contacto" salte a otra línea o se corte */
-  padding: 4px 6px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.1s ease;
+  white-space: nowrap;
+  padding: 8px 14px;
+  border-radius: 6px;
 }
 
-.nav-links a:hover {
-  color: var(--dorado);
-  text-decoration: underline;
+.nav-links li a:hover,
+.nav-links li a:focus {
+  background-color: var(--dorado);
+  color: var(--vino-oscuro);
+  transform: translateY(-1px);
+  outline: none;
 }
 
-/* ================== HEADER PRINCIPAL ================== */
-/* regla base para el header sin margin-top que crea huecos inconsistentes */
+/* ================== Contenedores y Títulos ================== */
 .main-header {
   padding: 0 var(--spacing-md);
 }
 
-/* Solo para la pantalla principal: centrar horizontal y alinear hacia arriba bajo la navbar.
-   Ajusta padding-top para controlar la distancia exacta entre navbar y título. */
 body > .main-header {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* alinear hacia arriba bajo la navbar */
+  justify-content: flex-start;
   flex-direction: column;
   min-height: calc(100vh - var(--navbar-height));
   margin: 0;
-  /* pequeño espacio visual entre navbar y títulos */
   padding: 12px var(--spacing-md) 24px;
   text-align: center;
   gap: 8px;
@@ -192,30 +130,83 @@ body > .main-header {
   margin-bottom: var(--spacing-md);
 }
 
-/* ================== OPCIONES ================== */
+.perfil-container,
+.reglas-container,
+.transacciones-container,
+.main-container {
+  max-width: 1100px;
+  margin: 40px auto 60px;
+  text-align: left;
+  background-color: rgba(128, 0, 32, 0.88);
+  border: none;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  border-radius: 14px;
+  padding: 28px 22px;
+  color: var(--blanco-suave);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.main-title {
+  color: var(--blanco-suave);
+  text-align: center;
+  margin-bottom: 6px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.intro {
+  text-align: center;
+  color: var(--blanco-suave);
+  margin-bottom: 24px;
+}
+
+.section-title {
+  color: var(--dorado);
+  font-weight: 900;
+  margin: 18px 0 10px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 84px;
+  height: 3px;
+  background: var(--dorado);
+  border-radius: 2px;
+  margin-top: 6px;
+  margin: 6px auto 0;
+}
+
+.regla-seccion {
+  margin-bottom: 26px;
+}
+
+/* ================== Elementos Específicos ================== */
 .options {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   max-width: 400px;
-  margin: 16px auto 0 auto; /* reducir margen superior para no empujar hacia abajo */
+  margin: 16px auto 0 auto;
 }
 
-/* ================== BOTÓN CASINO ================== */
 .btn-casino {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
-  background-color: var(--btn-bg);
-  color: var(--blanco-suave);
-  padding: 12px 25px;
-  border: 2px solid var(--blanco-suave);
-  text-decoration: none;
-  font-weight: bold;
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  padding: 10px 16px;
+  font-weight: 800;
+  text-align: center;
   border-radius: 10px;
-  transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .1s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.1s ease;
+  text-decoration: none;
 }
 
 .btn-casino svg {
@@ -224,21 +215,21 @@ body > .main-header {
 
 .btn-casino:hover,
 .btn-casino:focus {
-  background-color: var(--btn-hover-bg);
-  color: var(--btn-hover-text);
-  border-color: var(--btn-hover-bg);
+  background-color: var(--dorado);
+  color: var(--vino-oscuro);
+  border-color: var(--dorado);
   box-shadow: 0 0 12px rgba(172, 146, 92, 0.6);
-  transform: scale(1.05);
-  outline: var(--focus-outline);
+  transform: scale(1.03);
+  outline: none;
 }
 
-/* ================== FORMULARIO ================== */
 .form-control {
   background-color: transparent;
   border: 2px solid var(--blanco);
   color: var(--blanco);
   border-radius: 10px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px 12px;
 }
 .form-control::placeholder {
   color: #ccc;
@@ -246,7 +237,7 @@ body > .main-header {
 .form-control:focus {
   border-color: var(--dorado);
   box-shadow: 0 0 8px rgba(172, 146, 92, 0.6);
-  background-color: rgba(255,255,255,0.05);
+  background-color: rgba(255, 255, 255, 0.05);
   outline: none;
 }
 
@@ -254,121 +245,32 @@ input[type="date"] {
   color-scheme: dark;
 }
 
-/* ================== CONTENEDOR REGLAS ================== */
-.reglas-container {
-  max-width: 1000px;
-  margin: 40px auto 60px;
-  text-align: left;
-  background-color: rgba(128,0,32,0.88);
-  border: none;
-  box-shadow: 0 12px 28px rgba(0,0,0,.35);
-  border-radius: 14px;
-  padding: 28px 22px;
-  color: var(--blanco-suave);
-  animation: fadeInUp 0.8s ease-out;
-}
-
-/* ================== TÍTULOS ================== */
-.main-title{
-  color: var(--blanco-suave);
-  text-align: center;
-  margin-bottom: 6px;
-  font-weight: 800;
-  letter-spacing: .4px;
-  text-shadow: 0 2px 10px rgba(0,0,0,.35);
-}
-.intro{
-  text-align: center;
-  color: var(--blanco-suave);
-  margin-bottom: 20px;
-}
-
-.section-title {
-  color: var(--dorado);
-  font-weight: 900;
-  margin: 18px 0 10px;
-  text-shadow: 0 1px 8px rgba(0,0,0,.35);
-}
-.section-title::after {
-  content: "";
-  display: block;
-  width: 84px;
-  height: 3px;
-  background: var(--dorado);
-  border-radius: 2px;
-  margin: 6px auto 0;
-}
-
-/* ================== TEXTO Y LISTAS ================== */
-.regla-seccion{ margin-bottom: 26px; }
-.regla-seccion p{ color: var(--blanco-suave); }
-
-.list-ruleta{
+.list-ruleta {
   margin: 0;
   padding-left: 18px;
 }
-.list-ruleta li{
+.list-ruleta li {
   margin-bottom: 8px;
   line-height: 1.5;
   color: var(--blanco-suave);
 }
 
-.apuesta-item{
+/* Regla de color para los divs de tipo de apuesta */
+.apuesta-item {
   color: var(--blanco-suave);
-  background: rgba(0,0,0,0.22);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   padding: 12px 14px;
-  transition: transform .08s ease, border-color .2s ease, background-color .2s ease;
+  transition: transform 0.08s ease, border-color 0.2s ease, background-color 0.2s ease;
+  margin-bottom: 10px;
 }
-.apuesta-item:hover{
+.apuesta-item:hover {
   transform: translateY(-1px);
-  border-color: rgba(255,255,255,0.28);
-  background: rgba(0,0,0,0.28);
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.28);
 }
 
-/* ================== TABLA ================== */
-.table-ruleta,
-.table-ruleta > :not(caption) > * > *{
-  background-color: transparent !important;
-  color: var(--blanco-suave);
-}
-
-.table-ruleta{
-  border: 1px solid rgba(255,255,255,.14);
-  border-radius: 12px;
-  overflow: hidden;
-  background-color: rgba(60,0,45,0.35) !important;
-}
-
-.table-ruleta thead th{
-  background-color: var(--dorado) !important;
-  color: var(--vino-oscuro) !important;
-  font-weight: 900;
-  border: none;
-}
-
-.table-ruleta tbody tr{
-  background-color: rgba(0,0,0,0.22) !important;
-}
-.table-ruleta tbody tr:nth-child(2n){
-  background-color: rgba(0,0,0,0.28) !important;
-}
-.table-ruleta tbody tr:hover{
-  background-color: rgba(0,0,0,0.34) !important;
-}
-
-.table-ruleta td, .table-ruleta th{
-  border-top: 1px solid rgba(255,255,255,.16) !important;
-  white-space: nowrap;
-  vertical-align: middle;
-}
-.table-ruleta tbody td,
-.table-ruleta tbody th{
-  color: #ffffff !important;           
-}
-
-/* ================== BOTÓN ACCEDER ================== */
 .btn-acceder {
   display: block;
   margin: 0 auto;
@@ -390,7 +292,150 @@ input[type="date"] {
   transform: scale(1.03);
 }
 
-/* ================== ANIMACIONES ================== */
+/* Bloques / tarjetas */
+.card-block {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 18px 16px;
+}
+.card-block + .card-block {
+  margin-top: 16px;
+}
+
+/* Info personal */
+.perfil-header {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #4b1428, #5a2033);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+.perfil-line {
+  margin: 0 0 6px;
+}
+.perfil-line .label {
+  color: #ffeaca;
+  font-weight: 800;
+  display: inline-block;
+  min-width: 140px;
+}
+.perfil-line .value {
+  color: var(--blanco-suave);
+}
+
+/* Saldo */
+.saldo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.saldo-valor {
+  font-size: clamp(1.8rem, 4.2vw, 2.4rem);
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+  margin: 6px 0 10px;
+}
+.saldo-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Tablas */
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-ruleta,
+.table-cuenta {
+  min-width: 600px;
+  border: 1px solid #1a000d;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background-color: #3c002d;
+}
+
+.table-ruleta thead th,
+.table-cuenta thead th {
+  background-color: var(--dorado);
+  color: var(--vino-oscuro);
+  font-weight: 900;
+  border: none;
+}
+.table-ruleta tbody tr,
+.table-cuenta tbody tr {
+  background: linear-gradient(90deg, #3c002d 0%, #1a000d 100%);
+}
+.table-ruleta tbody tr:nth-child(2n),
+.table-cuenta tbody tr:nth-child(2n) {
+  background: linear-gradient(90deg, #2a001d 0%, #0a0006 100%);
+}
+.table-ruleta tbody tr:hover,
+.table-cuenta tbody tr:hover {
+  background: linear-gradient(90deg, #500030 0%, #2b0015 100%);
+}
+.table-ruleta td,
+.table-ruleta th,
+.table-cuenta td,
+.table-cuenta th {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  white-space: nowrap;
+  vertical-align: middle;
+  font-size: 1.05rem !important;
+}
+
+/* Asegura el color del texto en el cuerpo de las tablas */
+.table-ruleta tbody td,
+.table-cuenta tbody td,
+.table-ruleta tbody th,
+.table-cuenta tbody th {
+  color: var(--blanco-suave);
+}
+.footnote {
+  color: var(--blanco-suave);
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+/* Bootstrap alerts sobre nuestro fondo */
+.alert {
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .25);
+}
+.alert-success {
+  background: rgba(40, 167, 69, .15);
+  color: #d2f5dc;
+}
+.alert-danger {
+  background: rgba(220, 53, 69, .18);
+  color: #ffd9de;
+}
+.alert-warning {
+  background: rgba(255, 193, 7, .18);
+  color: #fff1c2;
+}
+.alert-info {
+  background: rgba(23, 162, 184, .18);
+  color: #d3f1f6;
+}
+
+/* ================== Animaciones y Responsive ================== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -402,43 +447,48 @@ input[type="date"] {
   }
 }
 
-/* ================== RESPONSIVE ================== */
-@media (max-width: 576px){
-  .reglas-container{ padding: 20px 16px; }
-  .table-ruleta{ font-size: .95rem; }
-}
-
-/* responsive: mantener proporción del logo en pantallas pequeñas */
 @media (max-width: 576px) {
-  .navbar-logo,
-  .navbar .navbar-logo,
-  .navbar-brand img,
-  .navbar-logo img,
-  .navbar > img,
-  .navbar img,
-  .navbar .navbar-brand img,
-  .navbar img.logo,
-  .logo-img,
-  .logo {
-    max-height: calc(var(--navbar-height) - 24px) !important; /* más espacio para padding en móvil */
-    height: calc(var(--navbar-height) - 24px) !important;
-    width: auto !important;
-    object-fit: contain !important;
-    display: block !important;
+  .reglas-container,
+  .perfil-container,
+  .transacciones-container {
+    padding: 20px 16px;
   }
-
-  /* ajustar padding de navbar para móviles si se desea más espacio */
+  .table-ruleta,
+  .table-cuenta {
+    font-size: 0.95rem;
+  }
   .navbar {
     padding: 8px 12px;
-    height: var(--navbar-height);
   }
-
+  .navbar-logo {
+    height: 38px;
+    max-height: 38px;
+  }
   .nav-links {
-    gap: 12px;
+    gap: 8px;
   }
-
-  .nav-links a {
-    font-size: 1rem;
+  .nav-links li a {
+    font-size: 0.95rem;
   }
 }
-/* ...existing code... */
+
+/* Overrides para títulos específicos */
+.transacciones-container .row.g-4 > .col-12.col-lg-6 .section-title {
+  color: #ffffff;
+}
+
+/* Override para botón de Ruleta */
+.saldo-actions .btn-casino {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* Asegura que el navbar sea consistente en todas las páginas */
+.navbar-left a img {
+  height: 48px !important;
+  max-height: 48px !important;
+}
+
+.nav-links a {
+  font-size: 1.05rem !important;
+}

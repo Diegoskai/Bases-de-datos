@@ -1,0 +1,136 @@
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulación de Transacciones - Casino Virtual AND</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Estilos de esta página -->
+  <link rel="stylesheet" href="Union.css" />
+</head>
+<body id="top">
+
+  <nav class="navbar" role="navigation" aria-label="Menú principal">
+  <div class="navbar-left">
+    <a href="Inicio.html">
+      <img src="logo.png" alt="Logo Casino" class="navbar-logo">
+    </a>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="Ruleta.html">Ruleta</a></li>
+    <li><a href="Reglas.html">Reglas</a></li>
+    <li><a href="Premios.html">Premios</a></li>
+    <li><a href="Contacto.html">Contacto</a></li>
+  </ul>
+
+</nav>
+
+  <!-- CONTENIDO -->
+  <main class="container transacciones-container">
+    <h1 class="main-title">Simulación de Transacciones</h1>
+    <p class="intro">Deposita o retira fondos de forma simulada. El saldo se actualiza en pantalla.</p>
+
+    <!-- Indicador de saldo -->
+    <section class="card-block saldo-panel" aria-labelledby="saldo-actual-titulo">
+      <h2 id="saldo-actual-titulo" class="section-title">Saldo actual</h2>
+      <div id="saldo-actual" class="saldo-valor" aria-live="polite" aria-atomic="true">€ 1.250,00</div>
+    </section>
+
+    <div class="row g-4 mt-1">
+      <!-- Form Ingreso -->
+      <div class="col-12 col-lg-6">
+        <section class="card-block">
+          <h3 class="section-title">Ingresar dinero</h3>
+          <form id="form-ingresar" class="trans-form" novalidate>
+            <label for="monto-ingresar" class="form-label">Monto a ingresar (€)</label>
+            <input type="number" id="monto-ingresar" class="form-control"
+                   placeholder="Ej: 50.00" min="0.01" step="0.01" required />
+            <button type="submit" class="btn btn-casino mt-3">Ingresar</button>
+            <p id="msg-ingresar" class="feedback" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+      </div>
+
+      <!-- Form Retiro -->
+      <div class="col-12 col-lg-6">
+        <section class="card-block">
+          <h3 class="section-title">Retirar dinero</h3>
+          <form id="form-retirar" class="trans-form" novalidate>
+            <label for="monto-retirar" class="form-label">Monto a retirar (€)</label>
+            <input type="number" id="monto-retirar" class="form-control"
+                   placeholder="Ej: 25.00" min="0.01" step="0.01" required />
+            <button type="submit" class="btn btn-casino mt-3">Retirar</button>
+            <p id="msg-retirar" class="feedback" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a class="btn btn-casino" href="casino.html">Ir a la mesa de Ruleta</a>
+    </div>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Simulación simple de saldo (front-end) -->
+  <script>
+    (function(){
+      const formato = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' });
+      let saldo = 1250.00;
+
+      const saldoEl = document.getElementById('saldo-actual');
+      const formIn = document.getElementById('form-ingresar');
+      const formOut = document.getElementById('form-retirar');
+      const inMonto = document.getElementById('monto-ingresar');
+      const outMonto = document.getElementById('monto-retirar');
+      const msgIn = document.getElementById('msg-ingresar');
+      const msgOut = document.getElementById('msg-retirar');
+
+      function pintarSaldo(){ saldoEl.textContent = formato.format(saldo); }
+      function clearMsg(){ msgIn.textContent = ''; msgOut.textContent = ''; }
+
+      pintarSaldo();
+
+      formIn.addEventListener('submit', (e) => {
+        e.preventDefault(); clearMsg();
+        const v = parseFloat(inMonto.value);
+        if (Number.isNaN(v) || v <= 0) {
+          msgIn.textContent = 'Ingresa un monto válido mayor que 0.';
+          msgIn.className = 'feedback error';
+          return;
+        }
+        saldo = +(saldo + v).toFixed(2);
+        pintarSaldo();
+        msgIn.textContent = `Ingreso exitoso: ${formato.format(v)}.`;
+        msgIn.className = 'feedback ok';
+        formIn.reset();
+      });
+
+      formOut.addEventListener('submit', (e) => {
+        e.preventDefault(); clearMsg();
+        const v = parseFloat(outMonto.value);
+        if (Number.isNaN(v) || v <= 0) {
+          msgOut.textContent = 'Ingresa un monto válido mayor que 0.';
+          msgOut.className = 'feedback error';
+          return;
+        }
+        if (v > saldo) {
+          msgOut.textContent = 'No tienes saldo suficiente para retirar esa cantidad.';
+          msgOut.className = 'feedback error';
+          return;
+        }
+        saldo = +(saldo - v).toFixed(2);
+        pintarSaldo();
+        msgOut.textContent = `Retiro exitoso: ${formato.format(v)}.`;
+        msgOut.className = 'feedback ok';
+        formOut.reset();
+      });
+    })();
+  </script>
+</body>
+</html>
