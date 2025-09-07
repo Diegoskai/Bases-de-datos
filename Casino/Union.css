@@ -134,16 +134,16 @@ body > .main-header {
 .reglas-container,
 .transacciones-container,
 .main-container {
-  max-width: 1100px;
-  margin: 40px auto 60px;
-  text-align: left;
-  background-color: rgba(128, 0, 32, 0.88);
-  border: none;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-  border-radius: 14px;
-  padding: 28px 22px;
-  color: var(--blanco-suave);
-  animation: fadeInUp 0.8s ease-out;
+    max-width: 1300px; /* Aumentado para dar más espacio y evitar el scroll horizontal */
+    margin: 40px auto 60px;
+    text-align: left;
+    background-color: rgba(128, 0, 32, 0.88);
+    border: none;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    border-radius: 14px;
+    padding: 28px 22px;
+    color: var(--blanco-suave);
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .main-title {
@@ -271,26 +271,6 @@ input[type="date"] {
   background: rgba(0, 0, 0, 0.28);
 }
 
-.btn-acceder {
-  display: block;
-  margin: 0 auto;
-  background-color: transparent;
-  color: white;
-  border: 2px solid white;
-  padding: 10px 20px;
-  font-weight: bold;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-acceder:hover {
-  background-color: var(--dorado);
-  color: var(--vino-oscuro);
-  border-color: var(--dorado);
-  transform: scale(1.03);
-}
 
 /* Bloques / tarjetas */
 .card-block {
@@ -364,49 +344,58 @@ input[type="date"] {
 .table-ruleta,
 .table-cuenta {
   min-width: 600px;
-  border: 1px solid #1a000d;
+  border: none; /* Borde más claro */
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  background-color: #3c002d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra más suave */
+  background-color: #f8f5f0; /* Fondo principal de la tabla */
+  color: var(--vino-oscuro); /* Color de texto por defecto para el cuerpo */
 }
 
 .table-ruleta thead th,
 .table-cuenta thead th {
-  background-color: var(--dorado);
-  color: var(--vino-oscuro);
+  background-color: var(--dorado); /* Color dorado para el encabezado */
+  color: var(--vino-oscuro); /* Texto oscuro en el encabezado */
   font-weight: 900;
   border: none;
+  border-bottom: 1px solid var(--dorado); /* Borde inferior para el encabezado */
 }
+
 .table-ruleta tbody tr,
 .table-cuenta tbody tr {
-  background: linear-gradient(90deg, #3c002d 0%, #1a000d 100%);
+  background-color: #fff; /* Fondo blanco para filas impares (sin stripe) */
 }
-.table-ruleta tbody tr:nth-child(2n),
-.table-cuenta tbody tr:nth-child(2n) {
-  background: linear-gradient(90deg, #2a001d 0%, #0a0006 100%);
+
+.table-ruleta tbody tr:nth-child(even), /* Filas pares */
+.table-cuenta tbody tr:nth-child(even) {
+  background-color: #f3f0eb; /* Fondo ligeramente beige para filas pares */
 }
+
 .table-ruleta tbody tr:hover,
 .table-cuenta tbody tr:hover {
-  background: linear-gradient(90deg, #500030 0%, #2b0015 100%);
+  background-color: #e5e0d7; /* Efecto hover más suave */
 }
+
 .table-ruleta td,
 .table-ruleta th,
 .table-cuenta td,
 .table-cuenta th {
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1px solid #ececec; /* Borde superior de celda más claro */
   white-space: nowrap;
   vertical-align: middle;
   font-size: 1.05rem !important;
+  color: var(--vino-oscuro); /* Asegura el color de texto para todas las celdas */
 }
 
-/* Asegura el color del texto en el cuerpo de las tablas */
-.table-ruleta tbody td,
-.table-cuenta tbody td,
-.table-ruleta tbody th,
-.table-cuenta tbody th {
-  color: var(--blanco-suave);
+/* Colores para las celdas de resultado/variación de saldo */
+.table-ruleta .text-success {
+    color: #28a745 !important; /* Verde Bootstrap */
 }
+
+.table-ruleta .text-danger {
+    color: #dc3545 !important; /* Rojo Bootstrap */
+}
+
 .footnote {
   color: var(--blanco-suave);
   margin-top: 10px;
@@ -491,4 +480,45 @@ input[type="date"] {
 
 .nav-links a {
   font-size: 1.05rem !important;
+}
+.equipo {
+  display: flex; /* Habilita Flexbox */
+  flex-wrap: wrap; /* Permite que las tarjetas se envuelvan a la siguiente línea */
+  justify-content: center; /* Centra las tarjetas horizontalmente */
+  align-items: stretch; /* ¡Esta es la clave! Estira los elementos para que tengan la misma altura */
+  gap: 20px;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.desarrollador {
+    max-width: 250px;
+    text-align: center;
+    padding: 20px;
+}
+
+.desarrollador-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--dorado);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 15px;
+}
+
+.desarrollador h3 {
+    color: var(--dorado);
+    margin-bottom: 5px;
+}
+
+.desarrollador p {
+    font-size: 0.9em;
+    color: var(--blanco-suave);
+    margin: 0;
+}
+/* ================== Imágenes y Gráficos ================== */
+.ruleta-wheel-final {
+    max-width: 355px;
+    background-color: transparent;
 }
